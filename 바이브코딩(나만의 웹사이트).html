@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>라따뚜의 세상 | 이재현 포트폴리오</title>
+  <meta name="description" content="낭만 추구 육군 통신장교, 라따뚜(이재현)의 개인 포트폴리오 웹사이트입니다. 정보보호, AI, 그리고 여행과 스쿠버다이빙의 기록." />
+
+  <!-- 단정하고 읽기 쉬운 웹폰트 (Pretendard & Inter) 불러오기 - 오프라인 환경에서도 애플/시스템 기본 산세리프 폰트로 자동 대체됨 -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+  <style>
+    /* ==========================================================================
+       1. 디자인 토큰 & 컬러 시스템 (Apple & OpenAI 에디토리얼 미니멀 스타일 + 'C 산뜻함')
+       - 너무 AI스러운 네온/보라빛 그라데이션을 배제하고, 밝은 배경과 정교한 타이포그래피,
+         여백의 미, 산뜻한 오션 코발트 블루 & 청량한 틸(Teal) 포인트를 사용합니다.
+       ========================================================================== */
+    :root {
+      /* 배경 색상 (밝고 깨끗한 톤) */
+      --bg-primary: #fbfbfd;
+      --bg-secondary: #f2f4f7;
+      --bg-card: #ffffff;
+      --bg-glass: rgba(251, 251, 253, 0.82);
+
+      /* 텍스트 색상 */
+      --text-primary: #1d1d1f;
+      --text-secondary: #515154;
+      --text-muted: #86868b;
+
+      /* 포인트 색상 ('C 산뜻함': 지적인 정보보호/AI의 코발트 블루 + 스쿠버다이빙/낭만의 아쿠아 틸) */
+      --accent-blue: #0066cc;
+      --accent-blue-hover: #0052a3;
+      --accent-blue-soft: #eef5fc;
+      --accent-teal: #007a78;
+      --accent-teal-soft: #eaf6f6;
+
+      /* 보더 및 그림자 */
+      --border-hairline: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.14);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.035);
+      --shadow-card-hover: 0 12px 36px rgba(0, 0, 0, 0.07);
+
+      /* 레이아웃 및 둥근 모서리 */
+      --max-width: 1120px;
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-pill: 9999px;
+
+      /* 절제된 트랜지션 (움직임 적게, 정교하고 부드러운 전환) */
+      --transition-smooth: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    /* ==========================================================================
+       2. 기본 리셋 및 타이포그래피
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 84px;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      letter-spacing: -0.015em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 섹션 공통 여백 (여백을 넉넉히) */
+    section {
+      padding: 112px 0;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-blue);
+      margin-bottom: 12px;
+    }
+
+    .section-eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-blue);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      margin-top: 14px;
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      max-width: 640px;
+    }
+
+    /* ==========================================================================
+       3. 상단 네비게이션 바 (HOME | ABOUT | WORK | CONTACT)
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px;
+      background-color: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-hairline);
+      transition: var(--transition-smooth);
+    }
+
+    .navbar-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+    }
+
+    .brand-sub {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding-left: 8px;
+      border-left: 1px solid var(--border-strong);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+      background-color: rgba(0, 0, 0, 0.045);
+    }
+
+    /* 모바일 햄버거 메뉴 버튼 */
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+    }
+
+    .mobile-menu-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* ==========================================================================
+       4. HOME (첫 화면 / Hero 영역)
+       ========================================================================== */
+    #home {
+      padding-top: 84px;
+      padding-bottom: 104px;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .keyword-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .keyword-pill.accent-1 {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+      border-color: rgba(0, 102, 204, 0.15);
+    }
+
+    .keyword-pill.accent-2 {
+      background-color: var(--accent-teal-soft);
+      color: var(--accent-teal);
+      border-color: rgba(0, 122, 120, 0.15);
+    }
+
+    /* 첫 화면 대표 문구 (강조가 큰 제목) */
+    .hero-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.1rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.12;
+      color: var(--text-primary);
+      margin-bottom: 22px;
+      word-break: keep-all;
+    }
+
+    .hero-title .highlight {
+      color: var(--accent-blue);
+    }
+
+    .hero-lead {
+      font-size: clamp(1.125rem, 2vw, 1.35rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      word-break: keep-all;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 540px;
+      word-break: keep-all;
+    }
+
+    /* 버튼 영역 */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 26px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 102, 204, 0.22);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    /* 핵심 인상 요약 바 */
+    .impression-strip {
+      margin-top: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-hairline);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .impression-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .impression-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .impression-value {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       5. 교체하기 쉬운 사진 자리표시자 (Photo Placeholder Component)
+       - 사진 크게 연출 + 클릭 시 내 컴퓨터/스마트폰 사진으로 즉시 미리보기 지원
+       ========================================================================== */
+    .photo-frame {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-hairline);
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .photo-frame:hover {
+      border-color: rgba(0, 102, 204, 0.35);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .photo-frame.aspect-portrait {
+      aspect-ratio: 4 / 4.6;
+    }
+
+    .photo-frame.aspect-wide {
+      aspect-ratio: 16 / 10;
+    }
+
+    .photo-frame.aspect-square {
+      aspect-ratio: 1 / 1;
+    }
+
+    /* 실제 이미지를 넣었을 때 보여줄 스타일 */
+    .photo-frame img.user-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .photo-frame.has-image img.user-photo {
+      display: block;
+    }
+
+    .photo-frame.has-image .placeholder-content {
+      display: none;
+    }
+
+    /* 기본 자리표시자 디자인 (Apple/OpenAI 스타일의 정교한 그래픽 플레이스홀더) */
+    .placeholder-content {
+      width: 100%;
+      height: 100%;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(0, 102, 204, 0.08), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(0, 122, 120, 0.08), transparent 45%),
+        linear-gradient(180deg, #ffffff 0%, #f4f6f9 100%);
+    }
+
+    .placeholder-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .placeholder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .placeholder-action-hint {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background-color: var(--accent-blue-soft);
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+    }
+
+    .placeholder-center {
+      margin: auto 0;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .placeholder-icon-box {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 14px;
+      border-radius: 16px;
+      background-color: #ffffff;
+      border: 1px solid var(--border-hairline);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-blue);
+    }
+
+    .placeholder-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .placeholder-desc {
+      font-size: 0.84375rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .placeholder-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-strong);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* 이미지가 들어간 후 우측 하단에 표시되는 사진 변경 버튼 */
+    .photo-change-overlay {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      background-color: rgba(29, 29, 31, 0.75);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: var(--transition-smooth);
+      pointer-events: none;
+    }
+
+    .photo-frame:hover .photo-change-overlay {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       6. ABOUT (자기소개 영역 - 프로필 + 3단 스토리 + 나를 보여주는 3가지 카드)
+       ========================================================================== */
+    .about-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    /* 기본 프로필 카드 */
+    .profile-summary-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .profile-role-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .profile-name {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .profile-realname {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .profile-quote {
+      margin: 24px 0;
+      padding: 20px 24px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-secondary);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      border-left: 4px solid var(--accent-blue);
+      word-break: keep-all;
+    }
+
+    /* 자기소개 3문단 구조화 카드 */
+    .story-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .story-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .story-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background-color: var(--bg-secondary);
+      color: var(--accent-blue);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-hairline);
+    }
+
+    .story-question {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .story-answer {
+      font-size: 1.0625rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      word-break: keep-all;
+    }
+
+    /* 프로필에 넣을 사진 2장 영역 (증명사진 + 여행 및 취미 사진) */
+    .about-photos-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    /* 나를 잘 보여주는 세 가지 (3열 벤토 그리드 카드) */
+    .traits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .trait-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-smooth);
+    }
+
+    .trait-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .trait-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+    }
+
+    .trait-card:nth-child(2) .trait-icon {
+      background-color: var(--accent-teal-soft);
+      color: var(--accent-teal);
+    }
+
+    .trait-label {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .trait-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .trait-note {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      word-break: keep-all;
+    }
+
+    /* ==========================================================================
+       7. WORK (프로젝트·활동 콘텐츠 - 활동 1 & 활동 2 둘 다 대표 강조)
+       ========================================================================== */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .work-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .work-card:hover {
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .work-photo-wrap {
+      padding: 20px 20px 0 20px;
+    }
+
+    .work-photo-wrap .photo-frame {
+      border-radius: var(--radius-md);
+      box-shadow: none;
+    }
+
+    .work-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .work-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .work-category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .work-category-tag.security {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+    }
+
+    .work-category-tag.hobby {
+      background-color: var(--accent-teal-soft);
+      color: var(--accent-teal);
+    }
+
+    .work-period {
+      font-size: 0.84375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .work-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .work-summary-sentence {
+      font-size: 0.96875rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    /* 활동 상세 표 (내가 직접 한 일 / 결과·배운 점 / 관련 사진·작품) */
+    .work-details-list {
+      margin-top: auto;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .work-detail-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      font-size: 0.9rem;
+      align-items: baseline;
+    }
+
+    .work-detail-row:not(:last-child) {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .work-detail-label {
+      font-weight: 700;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+
+    .work-detail-value {
+      font-weight: 600;
+      color: var(--text-primary);
+      word-break: keep-all;
+    }
+
+    /* ==========================================================================
+       8. CONTACT (연락 영역)
+       ========================================================================== */
+    #contact {
+      border-bottom: none;
+      padding-bottom: 120px;
+    }
+
+    .contact-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 56px 48px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .contact-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+
+    .contact-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      word-break: keep-all;
+    }
+
+    .contact-links-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-hairline);
+      transition: var(--transition-smooth);
+    }
+
+    .contact-link-card:hover {
+      border-color: var(--accent-blue);
+      background-color: var(--accent-blue-soft);
+    }
+
+    .contact-link-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-link-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-link-value {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       9. 푸터 & 토스트 알림 메시지
+       ========================================================================== */
+    footer {
+      border-top: 1px solid var(--border-hairline);
+      padding: 36px 0;
+      background-color: var(--bg-secondary);
+      color: var(--text-muted);
+      font-size: 0.84375rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    /* 토스트 메시지 박스 (alert 대신 사용) */
+    .toast-message {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background-color: #1d1d1f;
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+      z-index: 999;
+    }
+
+    .toast-message.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ==========================================================================
+       10. 반응형 미디어 쿼리 (PC, 태블릿, 모바일 완벽 대응)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      section {
+        padding: 84px 0;
+      }
+
+      .hero-layout,
+      .about-top-grid,
+      .about-photos-grid,
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .traits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        padding: 40px 28px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-sub {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-card);
+        border-bottom: 1px solid var(--border-strong);
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 4px;
+        display: none;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li,
+      .nav-links a {
+        width: 100%;
+      }
+
+      .hero-title {
+        font-size: 2.35rem;
+      }
+
+      .profile-summary-card,
+      .story-card,
+      .trait-card,
+      .work-body {
+        padding: 26px 22px;
+      }
+
+      .work-detail-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       상단 네비게이션 바 (STEP 04: HOME | ABOUT | WORK | CONTACT)
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#home" class="brand-logo" aria-label="라따뚜의 세상 홈으로 이동">
+        <span class="brand-dot"></span>
+        <span>라따뚜의 세상</span>
+        <span class="brand-sub">이재현 (라따뚜)</span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="메뉴 열기">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#work">WORK</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======================================================================
+         01. HOME (첫 화면: 대표 문구 · 키워드 3개 · 대표 이미지)
+         ====================================================================== -->
+    <section id="home">
+      <div class="container">
+        <div class="hero-layout">
+          <!-- 좌측: 핵심 문구 및 키워드 -->
+          <div class="hero-text-col">
+            <!-- 나를 표현하는 키워드 3개 (1페이지 04번 항목) -->
+            <div class="hero-badges" aria-label="나를 표현하는 키워드 3개">
+              <span class="keyword-pill">#성실</span>
+              <span class="keyword-pill accent-1">#정보보호 · AI</span>
+              <span class="keyword-pill accent-2">#통신장교</span>
+            </div>
+
+            <!-- 첫 화면 대표 문구 (1페이지 05번 항목 원문 그대로 반영) -->
+            <h1 class="hero-title">
+              Welcom to<br />
+              <span class="highlight">라따뚜 World~!</span>
+            </h1>
+
+            <!-- 한 줄 소개 (2페이지 01번 항목) -->
+            <p class="hero-lead">
+              “저는 낭만을 추구하는 육군 통신장교입니다.”
+            </p>
+
+            <p class="hero-desc">
+              정보보호를 전공하고 현재 육군 통신중대장으로 임무를 수행하고 있는 <strong>라따뚜(이재현)</strong>의 공간입니다.
+              AI를 활용한 정보보호 전문가를 향한 여정과, 여행·스쿠버다이빙에서 찾은 낭만을 깔끔하고 창의적인 시선으로 기록합니다.
+            </p>
+
+            <!-- 방문자가 눌러야 할 대표 버튼 (4페이지 04번 항목: WORK 및 ABOUT 연결) -->
+            <div class="hero-actions">
+              <a href="#work" class="btn btn-primary">
+                <span>활동 보러 가기 (WORK)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="#about" class="btn btn-secondary">자기소개 보기 (ABOUT)</a>
+            </div>
+
+            <!-- 웹사이트 인상 & 핵심 정보 요약 (1페이지 03번 항목) -->
+            <div class="impression-strip">
+              <div class="impression-item">
+                <span class="impression-label">IDENTITY</span>
+                <span class="impression-value">낭만 추구 통신장교</span>
+              </div>
+              <div class="impression-item">
+                <span class="impression-label">FOCUS</span>
+                <span class="impression-value">정보보호 &amp; AI 활용</span>
+              </div>
+              <div class="impression-item">
+                <span class="impression-label">IMPRESSION</span>
+                <span class="impression-value">깔끔하다 · 창의적이다</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우측: 첫 화면 대표 이미지 자리표시자 -->
+          <!-- [사진 교체 방법] 아래 img 태그의 src="" 안에 준비된 이미지 파일 경로(예: "hero.jpg")를 넣고, 부모 div에 has-image 클래스를 추가하거나 화면에서 바로 클릭해 사진을 불러올 수 있습니다. -->
+          <div class="hero-image-col">
+            <div class="photo-frame aspect-portrait" data-photo-slot="hero" title="클릭하여 대표 사진을 미리보기로 넣어보세요">
+              <img class="user-photo" src="" alt="라따뚜의 세상 대표 프로필 이미지" />
+              <div class="placeholder-content">
+                <div class="placeholder-top">
+                  <span class="placeholder-badge">MAIN VISUAL · 01</span>
+                  <span class="placeholder-action-hint">클릭하여 사진 넣기</span>
+                </div>
+                <div class="placeholder-center">
+                  <div class="placeholder-icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                  <p class="placeholder-title">첫 화면 대표 이미지 자리</p>
+                  <p class="placeholder-desc">
+                    나를 가장 잘 보여주는 사진(군복 프로필 또는 여행·스쿠버다이빙 사진)을 배치할 공간입니다.
+                  </p>
+                </div>
+                <div class="placeholder-bottom">
+                  <span>라따뚜 (이재현)</span>
+                  <span>클릭 시 브라우저에서 즉시 미리보기</span>
+                </div>
+              </div>
+              <span class="photo-change-overlay">사진 변경하기</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         02. ABOUT (자기소개 영역: 기본 프로필 · 3문단 소개 · 사진 2종 · 3가지 특징)
+         ====================================================================== -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">ABOUT · 자기소개</span>
+          <h2 class="section-title">성실함 위에 낭만과 기술을 더합니다.</h2>
+          <p class="section-subtitle">
+            맡은 임무를 책임감 있게 수행하는 통신장교이자, 바다와 여행을 사랑하며 AI 시대의 정보보호를 연구하는 사람입니다.
+          </p>
+        </div>
+
+        <!-- 상단: 공개할 기본 프로필 + 자기소개 3문단 (2페이지 01, 02번 항목) -->
+        <div class="about-top-grid">
+          <!-- 기본 프로필 카드 -->
+          <div class="profile-summary-card">
+            <div>
+              <span class="profile-role-badge">낭만 추구 통신장교</span>
+              <h3 class="profile-name">
+                라따뚜 <span class="profile-realname">(이재현)</span>
+              </h3>
+              <blockquote class="profile-quote">
+                “저는 낭만을 추구하는 육군 통신장교입니다.”
+              </blockquote>
+            </div>
+
+            <div class="work-details-list">
+              <div class="work-detail-row">
+                <span class="work-detail-label">성격·태도</span>
+                <span class="work-detail-value">성실</span>
+              </div>
+              <div class="work-detail-row">
+                <span class="work-detail-label">관심·강점</span>
+                <span class="work-detail-value">정보보호, AI</span>
+              </div>
+              <div class="work-detail-row">
+                <span class="work-detail-label">현재 역할</span>
+                <span class="work-detail-value">육군 통신장교 (통신중대장)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 자기소개 문단 3가지 질문/답변 (2페이지 02번 항목) -->
+          <div class="story-card">
+            <div class="story-item">
+              <div class="story-num">01</div>
+              <div>
+                <p class="story-question">지금 무엇을 하고 있나요? (전공·업무·생활의 중심)</p>
+                <p class="story-answer">
+                  정보보호를 전공하고 통신장교로 임관하여 현재 <strong>통신중대장</strong>으로 임무수행 중입니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="story-item">
+              <div class="story-num">02</div>
+              <div>
+                <p class="story-question">무엇을 좋아하고 어떤 분야에 관심 있나요?</p>
+                <p class="story-answer">
+                  <strong>여행과 스쿠버다이빙</strong>을 통해 일상의 낭만을 추구하며, 직무와 관련하여 <strong>정보보호와 AI</strong> 분야에 깊은 관심을 가지고 있습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="story-item">
+              <div class="story-num">03</div>
+              <div>
+                <p class="story-question">앞으로 어떤 일을 해보고 싶나요?</p>
+                <p class="story-answer">
+                  전공 지식과 지휘·실무 경험을 바탕으로 <strong>AI를 활용한 정보보호 전문가</strong>로 나아가고자 합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 중단: 프로필에 넣을 사진 2가지 자리표시자 (2페이지 04번 항목: 증명사진 / 여행 및 취미 사진) -->
+        <div class="about-photos-grid">
+          <!-- 사진 1: 증명사진 -->
+          <div class="photo-frame aspect-wide" data-photo-slot="profile-id" title="클릭하여 증명사진을 미리보기로 넣어보세요">
+            <!-- [사진 교체 방법] src="증명사진파일명.jpg" 로 변경하세요 -->
+            <img class="user-photo" src="" alt="이재현 증명사진" />
+            <div class="placeholder-content">
+              <div class="placeholder-top">
+                <span class="placeholder-badge">PROFILE PHOTO · 01</span>
+                <span class="placeholder-action-hint">클릭하여 사진 넣기</span>
+              </div>
+              <div class="placeholder-center">
+                <div class="placeholder-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <p class="placeholder-title">증명사진 자리표시자</p>
+                <p class="placeholder-desc">단정하고 신뢰감을 주는 증명사진 또는 정복/군복 프로필 사진을 넣을 자리입니다.</p>
+              </div>
+              <div class="placeholder-bottom">
+                <span>준비할 이미지 1: 증명사진</span>
+                <span>클릭하여 교체</span>
+              </div>
+            </div>
+            <span class="photo-change-overlay">사진 변경하기</span>
+          </div>
+
+          <!-- 사진 2: 여행 및 취미 사진 -->
+          <div class="photo-frame aspect-wide" data-photo-slot="profile-hobby" title="클릭하여 여행 및 취미 사진을 미리보기로 넣어보세요">
+            <!-- [사진 교체 방법] src="여행취미사진파일명.jpg" 로 변경하세요 -->
+            <img class="user-photo" src="" alt="여행 및 취미 사진" />
+            <div class="placeholder-content">
+              <div class="placeholder-top">
+                <span class="placeholder-badge">LIFE &amp; HOBBY PHOTO · 02</span>
+                <span class="placeholder-action-hint">클릭하여 사진 넣기</span>
+              </div>
+              <div class="placeholder-center">
+                <div class="placeholder-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                  </svg>
+                </div>
+                <p class="placeholder-title">여행 및 취미 사진 자리표시자</p>
+                <p class="placeholder-desc">낭만을 추구하는 일상을 보여주는 여행지 풍경이나 취미 활동 사진을 넣을 자리입니다.</p>
+              </div>
+              <div class="placeholder-bottom">
+                <span>준비할 이미지 2: 여행 및 취미 사진</span>
+                <span>클릭하여 교체</span>
+              </div>
+            </div>
+            <span class="photo-change-overlay">사진 변경하기</span>
+          </div>
+        </div>
+
+        <!-- 하단: 나를 잘 보여주는 세 가지 (2페이지 03번 항목) -->
+        <div class="traits-grid">
+          <!-- 1. 내가 잘하는 것 -->
+          <article class="trait-card">
+            <div class="trait-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <p class="trait-label">STRENGTH · 내가 잘하는 것</p>
+            <h3 class="trait-title">자료조사 및 수집, 경청</h3>
+            <p class="trait-note">
+              필요한 정보를 체계적으로 조사·수집하여 정리하고, 상대방의 이야기를 깊이 경청하며 핵심을 파악합니다.
+            </p>
+          </article>
+
+          <!-- 2. 내가 좋아하는 것 -->
+          <article class="trait-card">
+            <div class="trait-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h20"></path>
+                <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"></path>
+                <path d="m4 8 16-4"></path>
+              </svg>
+            </div>
+            <p class="trait-label">FAVORITE · 내가 좋아하는 것</p>
+            <h3 class="trait-title">여행, 스쿠버다이빙</h3>
+            <p class="trait-note">
+              새로운 곳으로 떠나는 여행과 바닷속 세상을 탐험하는 스쿠버다이빙을 통해 삶의 활력과 낭만을 채웁니다.
+            </p>
+          </article>
+
+          <!-- 3. 요즘 배우고 있는 것 -->
+          <article class="trait-card">
+            <div class="trait-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <p class="trait-label">LEARNING · 요즘 배우고 있는 것</p>
+            <h3 class="trait-title">AI 활용 방법</h3>
+            <p class="trait-note">
+              빠르게 변화하는 기술 환경 속에서 AI를 실무와 정보보호 분야에 효과적으로 접목하는 방법을 배우고 있습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         03. WORK (프로젝트·활동 콘텐츠: 활동 1 & 활동 2 둘 다 대표 강조)
+         ====================================================================== -->
+    <section id="work">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">WORK &amp; EXPERIENCE · 주요 활동과 경험</span>
+          <h2 class="section-title">직무의 전문성과 삶의 낭만을 함께 기록합니다.</h2>
+          <p class="section-subtitle">
+            사이버보안 실무 점검을 수행한 <strong>무기체계 시험평가</strong> 경험과, 새로운 세상에 도전한 <strong>스쿠버 다이빙</strong> 기록입니다.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <!-- 활동 1: 무기체계 시험평가 (4페이지 활동 1 항목) -->
+          <article class="work-card">
+            <div class="work-photo-wrap">
+              <div class="photo-frame aspect-wide" data-photo-slot="work-1" title="클릭하여 미사일 방호체계 관련 사진을 미리보기로 넣어보세요">
+                <!-- [사진 교체 방법] src="activity1.jpg" 로 변경하세요 -->
+                <img class="user-photo" src="" alt="무기체계 시험평가 - 미사일 방호체계 관련 이미지" />
+                <div class="placeholder-content">
+                  <div class="placeholder-top">
+                    <span class="placeholder-badge">ACTIVITY 01 · 보안 실무</span>
+                    <span class="placeholder-action-hint">클릭하여 사진 넣기</span>
+                  </div>
+                  <div class="placeholder-center">
+                    <div class="placeholder-icon-box">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      </svg>
+                    </div>
+                    <p class="placeholder-title">미사일 방호체계 관련 사진 자리</p>
+                    <p class="placeholder-desc">무기체계 시험평가 및 사이버보안 점검 활동을 상징하는 사진을 배치할 공간입니다.</p>
+                  </div>
+                  <div class="placeholder-bottom">
+                    <span>관련 사진·작품: 미사일 방호체계</span>
+                    <span>클릭하여 교체</span>
+                  </div>
+                </div>
+                <span class="photo-change-overlay">사진 변경하기</span>
+              </div>
+            </div>
+
+            <div class="work-body">
+              <div class="work-meta-row">
+                <span class="work-category-tag security">정보보호 · 직무 경험</span>
+                <span class="work-period">2024년 · LIG넥스원 대전지사</span>
+              </div>
+
+              <h3 class="work-title">무기체계 시험평가</h3>
+              <p class="work-summary-sentence">
+                2024년 LIG넥스원 대전지사에서 신규 도입되는 무기체계의 사이버보안 분야 점검을 직접 수행하며 무기체계 도입 절차를 체득했습니다.
+              </p>
+
+              <div class="work-details-list">
+                <div class="work-detail-row">
+                  <span class="work-detail-label">언제·어디서</span>
+                  <span class="work-detail-value">2024년 / LIG넥스원 대전지사</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">내가 직접 한 일</span>
+                  <span class="work-detail-value">신규도입 무기체계 사이버보안 분야 점검</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">결과·배운 점</span>
+                  <span class="work-detail-value">무기체계 도입 절차</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">관련 사진·작품</span>
+                  <span class="work-detail-value">미사일 방호체계</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- 활동 2: 스쿠버 다이빙 (4페이지 활동 2 항목) -->
+          <article class="work-card">
+            <div class="work-photo-wrap">
+              <div class="photo-frame aspect-wide" data-photo-slot="work-2" title="클릭하여 스쿠버 다이빙 사진을 미리보기로 넣어보세요">
+                <!-- [사진 교체 방법] src="activity2.jpg" 로 변경하세요 -->
+                <img class="user-photo" src="" alt="세부·보홀 스쿠버 다이빙 활동 사진" />
+                <div class="placeholder-content">
+                  <div class="placeholder-top">
+                    <span class="placeholder-badge">ACTIVITY 02 · 도전과 낭만</span>
+                    <span class="placeholder-action-hint">클릭하여 사진 넣기</span>
+                  </div>
+                  <div class="placeholder-center">
+                    <div class="placeholder-icon-box" style="color: var(--accent-teal);">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                        <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                        <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+                      </svg>
+                    </div>
+                    <p class="placeholder-title">스쿠버 다이빙 사진 자리</p>
+                    <p class="placeholder-desc">세부·보홀의 바다에서 어드밴스드 자격증을 취득하며 촬영한 수중 사진을 배치할 공간입니다.</p>
+                  </div>
+                  <div class="placeholder-bottom">
+                    <span>관련 사진·작품: 스쿠버 다이빙</span>
+                    <span>클릭하여 교체</span>
+                  </div>
+                </div>
+                <span class="photo-change-overlay">사진 변경하기</span>
+              </div>
+            </div>
+
+            <div class="work-body">
+              <div class="work-meta-row">
+                <span class="work-category-tag hobby">HOBBY · 낭만 추구</span>
+                <span class="work-period">2024.12 · 세부, 보홀</span>
+              </div>
+
+              <h3 class="work-title">스쿠버 다이빙</h3>
+              <p class="work-summary-sentence">
+                2024년 12월 필리핀 세부와 보홀에서 어드밴스드(Advanced) 자격증을 취득하며, 물속에서 펼쳐지는 새로운 세상을 경험했습니다.
+              </p>
+
+              <div class="work-details-list">
+                <div class="work-detail-row">
+                  <span class="work-detail-label">언제·어디서</span>
+                  <span class="work-detail-value">2024.12 / 세부, 보홀</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">내가 직접 한 일</span>
+                  <span class="work-detail-value">자격증 취득 (어드벤스드)</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">결과·배운 점</span>
+                  <span class="work-detail-value">물속에서의 새로운 세상</span>
+                </div>
+                <div class="work-detail-row">
+                  <span class="work-detail-label">관련 사진·작품</span>
+                  <span class="work-detail-value">스쿠버 다이빙</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         04. CONTACT (연락 영역: 5페이지 구조와 동선 04번 항목 반영)
+         - 기획서 4페이지에서 상세 연락처 주소를 비워두셨으므로, 개인정보 보호를 지키면서
+           필요할 때 바로 주소를 넣어 쓸 수 있도록 깔끔한 자리표시자 형태로 구성했습니다.
+         ====================================================================== -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <span class="section-eyebrow">CONTACT · 소통하기</span>
+            <h2 class="contact-title">라따뚜의 세상에 방문해 주셔서 감사합니다.</h2>
+            <p class="contact-desc">
+              정보보호와 AI, 또는 여행과 스쿠버다이빙에 대한 이야기를 나누고 싶다면 언제든 환영합니다.
+              <!-- [연락처 수정 안내] 공개할 이메일이나 SNS 링크가 준비되면 아래 href 속성이나 텍스트를 자유롭게 수정해 사용하세요. -->
+            </p>
+          </div>
+
+          <div class="contact-links-grid">
+            <!-- 이메일 버튼 (클릭 시 안내 토스트 표시 또는 mailto 연결) -->
+            <a href="#contact" class="contact-link-card" id="emailContactBtn">
+              <div class="contact-link-info">
+                <span class="contact-link-label">EMAIL</span>
+                <span class="contact-link-value">이메일 주소 입력 자리</span>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </a>
+
+            <!-- 인스타그램 / SNS 자리표시자 -->
+            <a href="#contact" class="contact-link-card" id="snsContactBtn">
+              <div class="contact-link-info">
+                <span class="contact-link-label">SNS / BLOG</span>
+                <span class="contact-link-value">SNS·블로그 링크 자리 (선택)</span>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+
+            <!-- 맨 위로 이동 버튼 -->
+            <a href="#home" class="contact-link-card">
+              <div class="contact-link-info">
+                <span class="contact-link-label">TOP</span>
+                <span class="contact-link-value">첫 화면으로 돌아가기</span>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 푸터 영역 -->
+  <footer>
+    <div class="container footer-inner">
+      <span>© 라따뚜의 세상 (이재현). All rights reserved.</span>
+      <span>낭만 추구 육군 통신장교 · 정보보호 &amp; AI</span>
+    </div>
+  </footer>
+
+  <!-- 사진 미리보기용 숨겨진 파일 입력창 -->
+  <input type="file" id="hiddenPhotoInput" accept="image/*" style="display: none;" />
+
+  <!-- 알림 토스트 메시지 -->
+  <div id="toastMessage" class="toast-message" role="status" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       JavaScript: 네비게이션 스크롤 활성화, 모바일 메뉴, 사진 클릭 교체 미리보기
+       ======================================================================== -->
+  <script>
+    (function () {
+      // 1. 모바일 메뉴 토글
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      const navAnchors = navLinks.querySelectorAll('a');
+
+      if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function () {
+          navLinks.classList.toggle('open');
+        });
+
+        navAnchors.forEach(function (anchor) {
+          anchor.addEventListener('click', function () {
+            navLinks.classList.remove('open');
+          });
+        });
+      }
+
+      // 2. 스크롤 위치에 따른 상단 메뉴(HOME | ABOUT | WORK | CONTACT) 활성화 표시
+      const sections = document.querySelectorAll('main section[id]');
+      function updateActiveNav() {
+        const scrollY = window.scrollY + 140;
+        sections.forEach(function (sec) {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          const id = sec.getAttribute('id');
+          if (scrollY >= top && scrollY < top + height) {
+            navAnchors.forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+      // 3. 토스트 알림 표시 함수 (브라우저 기본 alert 대신 깔끔한 메시지 박스 사용)
+      const toastEl = document.getElementById('toastMessage');
+      let toastTimer = null;
+      function showToast(text) {
+        if (!toastEl) return;
+        toastEl.textContent = text;
+        toastEl.classList.add('show');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toastEl.classList.remove('show');
+        }, 3000);
+      }
+
+      // 4. 사진 자리표시자 클릭 시 내 기기의 사진으로 즉시 교체/미리보기 기능
+      const photoFrames = document.querySelectorAll('.photo-frame');
+      const hiddenPhotoInput = document.getElementById('hiddenPhotoInput');
+      let currentTargetFrame = null;
+
+      photoFrames.forEach(function (frame) {
+        frame.addEventListener('click', function () {
+          currentTargetFrame = frame;
+          hiddenPhotoInput.value = '';
+          hiddenPhotoInput.click();
+        });
+      });
+
+      if (hiddenPhotoInput) {
+        hiddenPhotoInput.addEventListener('change', function (event) {
+          const file = event.target.files && event.target.files[0];
+          if (!file || !currentTargetFrame) return;
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const img = currentTargetFrame.querySelector('img.user-photo');
+            if (img) {
+              img.src = e.target.result;
+              currentTargetFrame.classList.add('has-image');
+              showToast('사진이 화면에 적용되었습니다.');
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // 5. 연락처 자리표시자 클릭 시 안내 메시지
+      const emailBtn = document.getElementById('emailContactBtn');
+      const snsBtn = document.getElementById('snsContactBtn');
+
+      if (emailBtn) {
+        emailBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          showToast('코드의 CONTACT 영역에 공개할 이메일 주소를 입력해 연결할 수 있습니다.');
+        });
+      }
+
+      if (snsBtn) {
+        snsBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          showToast('코드의 CONTACT 영역에 인스타그램·블로그·GitHub 링크를 연결할 수 있습니다.');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
